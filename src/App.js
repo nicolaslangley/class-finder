@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import fire from '/fire';
+import ClassList from './ClassList.js';
+import fire from './fire';
 
 class App extends Component {
   render() {
@@ -11,9 +12,7 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <ClassList list={["Test", "Test2", "Test3"]} />
       </div>
     );
   }
