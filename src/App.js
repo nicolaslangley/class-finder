@@ -12,19 +12,20 @@ class App extends Component {
   }
 
   updateClassList() {
-    var req = new XMLHttpRequest();
-    var reqListener = function () {
-      console.log(this.responseText);
-    };
-    req.addEventListener("load", reqListener);
     var firebaseProjectID = fire.options.authDomain.split('.')[0];
-    var url = 'https://us-central1-' + firebaseProjectID + '.cloudfunctions.net/auth';
-    req.open('GET', url);
-    req.setRequestHeader('Content-Type', 'text/plain');
+    var url = 'https://cors.io/?https://us-central1-' + firebaseProjectID + '.cloudfunctions.net/findClasses';
+    var req = new XMLHttpRequest();
+    req.open('GET', url, true);
+    req.responsetype = 'text';
+    req.onload = function(e) {
+      if (req.readyState === req.DONE) {
+        if (req.status === 200) {
+            console.log(req.response);
+            this.setState({list: JSON.parse(req.response)});
+        }
+      }
+    }.bind(this);
     req.send();
-
-    // Update the class list here and store in this.state
-    this.setState({list: [url, "Test2", "Test3"]});
   }
 
   render() {
@@ -32,7 +33,7 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">Class Finder</h1>
         </header>
         <ClassList list={this.state.list}/>
         <button onClick={this.updateClassList}>
