@@ -5,7 +5,7 @@ class ClassList extends Component {
     return (
       <ul>
         {this.props.list.map(function(listValue){
-          return <li>{listValue}</li>
+          return <li key={listValue}>{listValue}</li>
         })}
       </ul>
     )
