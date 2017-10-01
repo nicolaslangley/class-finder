@@ -15,6 +15,7 @@ exports.findClasses = functions.https.onRequest((request, response) => {
     {
       result[i] = result[i].trim();
     }
+    console.log(result);
     response.send(result);
   })
 });
