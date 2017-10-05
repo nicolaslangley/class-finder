@@ -1,0 +1,19 @@
+.Listing {
+    background: beige;
+    margin: 5px;
+    display: flex;
+}
+
+.Listing-Left {
+    background: blue;
+    width: 200px;
+}
+
+.Listing-Right {
+    background: green;
+    flex-grow: 1;
+}
+
+.Listing-Title {
+    font: red;
+}

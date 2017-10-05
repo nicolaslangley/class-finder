@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import logo from './images/logo.svg';
 import './App.css';
-import ClassList from './ClassList.js';
-import fire from './fire';
+import ClassList from './components/ClassList';
+import fire from './utils/fire';
 
 class App extends Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class App extends Component {
 
   updateClassList() {
     var firebaseProjectID = fire.options.authDomain.split('.')[0];
-    var url = 'https://cors.io/?https://us-central1-' + firebaseProjectID + '.cloudfunctions.net/findClasses';
+    var url = 'https://us-central1-' + firebaseProjectID + '.cloudfunctions.net/findClasses';
     var req = new XMLHttpRequest();
     req.open('GET', url, true);
     req.responsetype = 'text';
@@ -31,15 +31,17 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
+        {/* <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Class Finder</h1>
-        </header>
-        <ClassList list={this.state.list}/>
+        </header> */}
+        <Header />
+        {/* <ClassList list={this.state.list} /> */}
+        <ClassList list={["Test"]} />
+        {/* <Footer /> */}
         <button onClick={this.updateClassList}>
         Update class list
         </button>
-
       </div>
     );
   }
