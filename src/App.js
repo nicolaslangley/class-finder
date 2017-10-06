@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
+import { Button } from 'react-bootstrap';
 import logo from './images/logo.svg';
 import './App.css';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
+import Masthead from './components/Masthead/Masthead';
 import ClassList from './components/ClassList';
 import fire from './utils/fire';
 
@@ -31,17 +35,15 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {/* <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Class Finder</h1>
-        </header> */}
         <Header />
+        <Masthead />
         {/* <ClassList list={this.state.list} /> */}
-        <ClassList list={["Test"]} />
+        <ClassList list={["Test", "Test2", "Test3"]} />
         {/* <Footer /> */}
-        <button onClick={this.updateClassList}>
-        Update class list
-        </button>
+        <Button onClick={this.updateClassList}>
+          Update class list
+        </Button>
+        <Footer />
       </div>
     );
   }

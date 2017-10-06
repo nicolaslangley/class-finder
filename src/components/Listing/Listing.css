@@ -1,7 +1,7 @@
 .Listing {
     background: beige;
     margin: 5px;
-    display: flex;
+    /* display: flex; */
 }
 
 .Listing-Left {
