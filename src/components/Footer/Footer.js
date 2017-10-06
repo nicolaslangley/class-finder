@@ -4,10 +4,10 @@ import './Footer.css';
 class Footer extends Component {
   render() {
     return (
-      <footer className="Footer">
-        Footer Content
-      </footer>
-    );    
+      <div className="Footer navbar-fixed-bottom">
+          Footer Content
+      </div>
+    );
   }
 }
 

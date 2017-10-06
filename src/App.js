@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
-import logo from './images/logo.svg';
 import './App.css';
 import Header from './components/Header/Header';
 import Masthead from './components/Masthead/Masthead';
 import ClassList from './components/ClassList/ClassList';
-import Footer from './components/Footer/Footer';
 import fire from './utils/fire';
 
 class App extends Component {
@@ -41,7 +39,6 @@ class App extends Component {
         <Button onClick={this.updateClassList}>
           Update class list
         </Button>
-        <Footer />
       </div>
     );
   }
