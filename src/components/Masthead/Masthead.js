@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import './Masthead.css';
 import { Jumbotron, Button } from 'react-bootstrap';
+import './Masthead.css';
 
 class Masthead extends Component {
   render() {

@@ -3,9 +3,9 @@ import { Button } from 'react-bootstrap';
 import logo from './images/logo.svg';
 import './App.css';
 import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
 import Masthead from './components/Masthead/Masthead';
-import ClassList from './components/ClassList';
+import ClassList from './components/ClassList/ClassList';
+import Footer from './components/Footer/Footer';
 import fire from './utils/fire';
 
 class App extends Component {
@@ -39,7 +39,6 @@ class App extends Component {
         <Masthead />
         {/* <ClassList list={this.state.list} /> */}
         <ClassList list={["Test", "Test2", "Test3"]} />
-        {/* <Footer /> */}
         <Button onClick={this.updateClassList}>
           Update class list
         </Button>

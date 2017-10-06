@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import { ListGroupItem } from 'react-bootstrap';
 import './Listing.css';
-import { Panel, ListGroupItem } from 'react-bootstrap';
 
 class Listing extends Component {
   render() {
