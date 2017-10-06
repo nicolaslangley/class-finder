@@ -37,8 +37,7 @@ class App extends Component {
       <div className="App">
         <Header />
         <Masthead />
-        {/* <ClassList list={this.state.list} /> */}
-        <ClassList list={["Test", "Test2", "Test3"]} />
+        <ClassList list={this.state.list} />
         <Button onClick={this.updateClassList}>
           Update class list
         </Button>
