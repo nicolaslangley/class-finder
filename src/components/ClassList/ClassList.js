@@ -7,7 +7,9 @@ import fire from '../../utils/fire';
 class ClassList extends Component {
   constructor(props) {
     super(props);
-    this.state = { list: [] };
+    this.state = { masterList: [], curList: [] };
+    this.applyFilters = this.applyFilters.bind(this);
+    this.resetFilters = this.resetFilters.bind(this);
     this.downloadClassList = this.downloadClassList.bind(this);
     this.downloadClassList();
   }
@@ -38,7 +40,8 @@ class ClassList extends Component {
       var xhr = new XMLHttpRequest();
       xhr.responseType = 'text';
       xhr.onload = function (event) {
-        this.setState({ list: JSON.parse(xhr.response) });
+        var result = JSON.parse(xhr.response);
+        this.setState({ masterList: result, curList: result });
       }.bind(this);
       xhr.open('GET', url);
       xhr.send();
@@ -47,6 +50,18 @@ class ClassList extends Component {
       // https://firebase.google.com/docs/storage/web/handle-errors
       console.log("We've encountered an error: " + error.code)
     });
+  }
+
+  applyFilters() {
+    // Dummy filter for PNCA
+    var output = this.state.masterList.filter(function(obj) {
+      return obj.school === "Pacific Northwest College of Art (PNCA)";
+    });
+    this.setState({ curList: output });
+  }
+
+  resetFilters() {
+    this.setState({ curList: this.state.masterList });
   }
 
   render() {
@@ -65,8 +80,14 @@ class ClassList extends Component {
             </Nav>
           </Navbar.Collapse>
         </Navbar>
+        <Button onClick={this.applyFilters}>
+        Filter Classes
+        </Button>
+        <Button onClick={this.resetFilters}>
+        Reset Filters
+        </Button>
         <ListGroup>
-          {this.state.list.map(function (listValue) {
+          {this.state.curList.map(function (listValue) {
             return <Listing key={listValue.name}
               title={listValue.name}
               school={listValue.school} />
