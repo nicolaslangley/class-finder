@@ -5,6 +5,7 @@ import Header from './components/Header/Header';
 import Masthead from './components/Masthead/Masthead';
 import ClassList from './components/ClassList/ClassList';
 import fire from './utils/fire';
+import Footer from './components/Footer/Footer';
 
 class App extends Component {
   constructor(props) {
@@ -39,6 +40,7 @@ class App extends Component {
         <Button onClick={this.updateClassList}>
           Update class list
         </Button>
+        <Footer />
       </div>
     );
   }
