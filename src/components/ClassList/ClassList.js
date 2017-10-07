@@ -7,7 +7,7 @@ class ClassList extends Component {
   render() {
     return (
       <div>
-        <Navbar>
+        <Navbar collapseOnSelect>
           <Navbar.Collapse>
             <Nav>
               <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
@@ -22,8 +22,9 @@ class ClassList extends Component {
         </Navbar>
         <ListGroup>
           {this.props.list.map(function (listValue) {
-            return <Listing key={listValue}
-              title={listValue} />
+            return <Listing key={listValue.name}
+                            title={listValue.name}
+                            school={listValue.school} />
           })}
         </ListGroup>
       </div>

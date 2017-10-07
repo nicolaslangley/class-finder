@@ -6,7 +6,7 @@ class Listing extends Component {
   render() {
     return (
       <ListGroupItem header={this.props.title}>
-        Content
+        {this.props.school}
       </ListGroupItem>
     );    
   }

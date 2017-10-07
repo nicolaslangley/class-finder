@@ -8,7 +8,8 @@ function scrape_pnca(body) {
   var $ = cheerio.load(body);
   var classList = [];
   var classes = $(".classdesc h3").each(function (i, elem) {
-    classList[i] = $(this).text().trim();
+    classList[i] = { name : $(this).text().trim(),
+                     school : "PNCA" };
   });
   return classList;
 }
@@ -19,7 +20,8 @@ function scrape_mhcc(body) {
   });
   var classList = [];
   var classes = $("Name").each(function (i, elem) {
-    classList[i] = $(this).text().trim();
+    classList[i] = { name : $(this).text().trim(),
+                     school : "MHCC" };
   });
   return classList;
 }
@@ -28,7 +30,8 @@ function scrape_pcc(body) {
   var $ = cheerio.load(body);
   var classList = [];  
   var classes = $(".course-list > dd > a").each(function(i, elem){
-    classList[i] = $(this).text().trim();
+    classList[i] = { name : $(this).text().trim(),
+                     school : "PCC" };
   });
   return classList;
 }
@@ -37,7 +40,8 @@ function scrape_ocac(body) {
   var $ = cheerio.load(body);
   var classList = [];  
   var classes = $(".course-teaser > .node-title").each(function(i, elem){
-    classList[i] = $(this).text().trim();
+    classList[i] = { name : $(this).text().trim(),
+                     school : "OCAC" };
   });
   return classList;
 }
@@ -46,7 +50,8 @@ function scrape_osu(body) {
   var $ = cheerio.load(body);
   var classList = [];  
   var classes = $(".field-content").each(function(i, elem){
-    classList[i] = $(this).text().trim();
+    classList[i] = { name : $(this).text().trim(),
+                     school : "OSU" };
   });
   return classList;
 }
@@ -65,7 +70,7 @@ exports.findClasses = functions.https.onRequest((req, res) => {
         rp(mhcc_url) // MHCC request
           .then(function (body) {
             console.log("\n===============\n" + "Pulling from MHCC: " + mhcc_url + "\n===============\n");
-            totalList = totalList.concat(scrape_mhcc(body));
+            totalList.concat(scrape_mhcc(body));
           }).then(function () {
             var pcc_url = 'https://www.pcc.edu/schedule/default.cfm?fa=dspTopicDetails&thisTerm=201704&topicid=CAR&type=Non-Credit';
             rp(pcc_url) // PCC request
