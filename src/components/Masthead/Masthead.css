@@ -16,23 +16,24 @@
     background-size: cover;
     color: #808080;
     align-content: center;
+    margin-bottom: 0;
 }
 
 .jumbotron h1 {
     font-family: unisansHeavy;
-    font-size: 52px;
+    font-size: 4.5vw;
     padding-block-start: 22px;
     padding-block-end: 10px;
 }
 
 .jumbotron p {
     font-family: unisansThin;
-    font-size: 24px;
+    font-size: 4.0vw;
     padding-block-end: 8px;
 }
 
 .registerButton {
-    font-size: 16px;
+    font-size: 2.0vw;
     background-color: #808080;
     border: none;
     text-align: center;

@@ -13,20 +13,51 @@
 }
 
 .listingLeft {
-    width: 700px;
-    height: 200px;
+    padding-left: relative;
+    width: 750px;
+    margin: auto;
 }
 
 .courseTitle {
     font-family: unisansHeavy;
+    font-size: 3.75vw;
 }
 
 .schoolTitle {
     font-family: unisansThin;
+    font-size: 2.0vw;
+    margin-bottom: 18px;
+}
+
+.time, .daysOfWeek, .startDate {
+    font-family: unisansThin;
+    font-size: 2.0vw;
 }
 
 .listingRight {
-    margin-top: 20px;
     flex-grow: 1;
+    margin: auto;
 }
 
+.schoolStreet, .schoolCity {
+    font-family: unisansThin;
+    font-size: 2.0vw;
+}
+
+.schoolCity {
+    margin-block-end: 35px;
+}
+
+.registerButton {
+    font-family: unisansThin;
+    font-size: 2.0vw;
+    background-color: #808080;
+    border: none;
+    text-align: center;
+    padding: 10px 32px; 
+    color: #FFFFFF;
+}
+
+.registerButton:hover{
+    background-color: #707070;
+}
