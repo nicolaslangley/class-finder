@@ -9,7 +9,7 @@ function scrape_pnca(body) {
   var classList = [];
   var classes = $(".classdesc h3").each(function (i, elem) {
     classList[i] = { name : $(this).text().trim(),
-                     school : "PNCA" };
+                     school : "Pacific Northwest College of Art (PNCA)" };
   });
   return classList;
 }
@@ -21,7 +21,7 @@ function scrape_mhcc(body) {
   var classList = [];
   var classes = $("Name").each(function (i, elem) {
     classList[i] = { name : $(this).text().trim(),
-                     school : "MHCC" };
+                     school : "Mt. Hood Community College (MHCC)" };
   });
   return classList;
 }
@@ -31,7 +31,7 @@ function scrape_pcc(body) {
   var classList = [];  
   var classes = $(".course-list > dd > a").each(function(i, elem){
     classList[i] = { name : $(this).text().trim(),
-                     school : "PCC" };
+                     school : "Portland Community College (PCC)" };
   });
   return classList;
 }
@@ -41,7 +41,7 @@ function scrape_ocac(body) {
   var classList = [];  
   var classes = $(".course-teaser > .node-title").each(function(i, elem){
     classList[i] = { name : $(this).text().trim(),
-                     school : "OCAC" };
+                     school : "Oregon College of Art and Craft (OCAC)" };
   });
   return classList;
 }
@@ -51,7 +51,7 @@ function scrape_osu(body) {
   var classList = [];  
   var classes = $(".field-content").each(function(i, elem){
     classList[i] = { name : $(this).text().trim(),
-                     school : "OSU" };
+                     school : "Oregon State University (OSU)" };
   });
   return classList;
 }

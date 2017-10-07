@@ -1,19 +1,32 @@
-.Listing {
-    background: beige;
-    margin: 5px;
-    /* display: flex; */
+@font-face {
+    font-family: unisansHeavy;
+    src: url("../../../fonts/unisansfree/Uni Sans Heavy.otf");
 }
 
-.Listing-Left {
-    background: blue;
-    width: 200px;
+@font-face {
+    font-family: unisansThin;
+    src: url("../../../fonts/unisansfree/Uni Sans Thin.otf");
 }
 
-.Listing-Right {
-    background: green;
+.listing {
+    display: flex; 
+}
+
+.listingLeft {
+    width: 700px;
+    height: 200px;
+}
+
+.courseTitle {
+    font-family: unisansHeavy;
+}
+
+.schoolTitle {
+    font-family: unisansThin;
+}
+
+.listingRight {
+    margin-top: 20px;
     flex-grow: 1;
 }
 
-.Listing-Title {
-    font: red;
-}
