@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ListGroup, Navbar, Nav, MenuItem, NavDropdown } from 'react-bootstrap';
+import { ListGroup, Navbar, Nav, MenuItem, NavDropdown, Button } from 'react-bootstrap';
 import './ClassList.css';
 import Listing from './Listing/Listing';
 import fire from '../../utils/fire';
@@ -7,9 +7,9 @@ import fire from '../../utils/fire';
 class ClassList extends Component {
   constructor(props) {
     super(props);
-    this.state = {list: []};
-    this.updateClassList = this.updateClassList.bind(this);
-    this.updateClassList();
+    this.state = { list: [] };
+    this.downloadClassList = this.downloadClassList.bind(this);
+    this.downloadClassList();
   }
 
   updateClassList() {
@@ -22,11 +22,31 @@ class ClassList extends Component {
       if (req.readyState === req.DONE) {
         if (req.status === 200) {
             console.log(req.response);
-            this.setState({list: JSON.parse(req.response)});
         }
       }
-    }.bind(this);
+    };
     req.send();
+  }
+
+  downloadClassList() {
+    var storage = fire.storage();
+    // Create a reference from a Google Cloud Storage URI
+    var gsReference = storage.refFromURL('gs://class-finder-541da.appspot.com/classlist.json');
+    // Get the download URL
+    gsReference.getDownloadURL().then(function (url) {
+      // This can be downloaded directly:
+      var xhr = new XMLHttpRequest();
+      xhr.responseType = 'text';
+      xhr.onload = function (event) {
+        this.setState({ list: JSON.parse(xhr.response) });
+      }.bind(this);
+      xhr.open('GET', url);
+      xhr.send();
+    }.bind(this)).catch(function (error) {
+      // A full list of error codes is available at
+      // https://firebase.google.com/docs/storage/web/handle-errors
+      console.log("We've encountered an error: " + error.code)
+    });
   }
 
   render() {
@@ -48,10 +68,13 @@ class ClassList extends Component {
         <ListGroup>
           {this.state.list.map(function (listValue) {
             return <Listing key={listValue.name}
-                            title={listValue.name}
-                            school={listValue.school} />
+              title={listValue.name}
+              school={listValue.school} />
           })}
         </ListGroup>
+        <Button onClick={this.updateClassList}>
+        Update Class List
+        </Button>
       </div>
     )
   }
