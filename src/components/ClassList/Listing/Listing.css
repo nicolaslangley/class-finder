@@ -20,18 +20,18 @@
 
 .courseTitle {
     font-family: unisansHeavy;
-    font-size: 3.75vw;
+    font-size: 2.0vw;
 }
 
 .schoolTitle {
     font-family: unisansThin;
-    font-size: 2.0vw;
-    margin-bottom: 18px;
+    font-size: 1.0vw;
+    margin-bottom: 8px;
 }
 
 .time, .daysOfWeek, .startDate {
     font-family: unisansThin;
-    font-size: 2.0vw;
+    font-size: 1.0vw;
 }
 
 .listingRight {
@@ -41,7 +41,7 @@
 
 .schoolStreet, .schoolCity {
     font-family: unisansThin;
-    font-size: 2.0vw;
+    font-size: 1.0vw;
 }
 
 .schoolCity {
@@ -50,7 +50,7 @@
 
 .registerButton {
     font-family: unisansThin;
-    font-size: 2.0vw;
+    font-size: 1.0vw;
     background-color: #808080;
     border: none;
     text-align: center;

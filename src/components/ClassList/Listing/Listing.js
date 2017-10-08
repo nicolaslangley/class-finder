@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { ListGroupItem, Button } from 'react-bootstrap';
+import { Panel, Button } from 'react-bootstrap';
 import './Listing.css';
 
 class Listing extends Component {
   render() {
     return (
-      <ListGroupItem className="listing">
+      <Panel className="listing" collapsible header={this.props.title} eventKey="1">
         <div className="listingLeft">
           <h3 className="courseTitle">{this.props.title}</h3>
           <p className="schoolTitle">{this.props.school}</p>
@@ -18,7 +18,7 @@ class Listing extends Component {
           <p className="schoolCity">Portland, Oregon 97209</p>
           <Button className="registerButton">Register</Button>
         </div>
-      </ListGroupItem>
+      </Panel>
     );    
   }
 }

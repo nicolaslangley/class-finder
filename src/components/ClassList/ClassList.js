@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ListGroup, Button } from 'react-bootstrap';
+import { PanelGroup, Button } from 'react-bootstrap';
 import Select from 'react-select';
 import './ClassList.css';
 import 'react-select/dist/react-select.css';
@@ -93,13 +93,13 @@ class ClassList extends Component {
         <Button onClick={this.resetFilters}>
           Reset Filters
         </Button>
-        <ListGroup>
+        <PanelGroup>
           {this.state.curList.map(function (listValue) {
             return <Listing key={listValue.name}
               title={listValue.name}
               school={listValue.school} />
           })}
-        </ListGroup>
+        </PanelGroup>
         <Button onClick={this.updateClassList}>
           Update Class List
         </Button>
