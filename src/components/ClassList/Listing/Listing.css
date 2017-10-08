@@ -12,26 +12,41 @@
     display: flex; 
 }
 
+.panel-default>.panel-heading{
+    font-family: unisansHeavy;
+}
+
+.panel-title>.collapsed {
+    font-size: 2vw;
+}
+
+.panel-heading>.panel-title {
+    font-size: 2.5vw;
+}
+
+.panel-group .panel+.panel{
+    margin-top: 1px;
+}
+
 .listingLeft {
     padding-left: relative;
-    width: 750px;
+    width: 600px;
     margin: auto;
 }
 
-.courseTitle {
+.schoolName {
     font-family: unisansHeavy;
-    font-size: 2.0vw;
+    font-size: 1.5vw;
 }
 
-.schoolTitle {
+.daysTime{
     font-family: unisansThin;
-    font-size: 1.0vw;
-    margin-bottom: 8px;
+    font-size: 1.2vw;
 }
 
-.time, .daysOfWeek, .startDate {
-    font-family: unisansThin;
-    font-size: 1.0vw;
+.startDate {
+    font-family: unisansHeavy;
+    font-size: 1.5vw;
 }
 
 .listingRight {
@@ -41,23 +56,19 @@
 
 .schoolStreet, .schoolCity {
     font-family: unisansThin;
-    font-size: 1.0vw;
-}
-
-.schoolCity {
-    margin-block-end: 35px;
+    font-size: 1.2vw;
 }
 
 .registerButton {
-    font-family: unisansThin;
-    font-size: 1.0vw;
+    font-family: unisansHeavy;
+    font-size: 1vw;
     background-color: #808080;
     border: none;
     text-align: center;
-    padding: 10px 32px; 
     color: #FFFFFF;
 }
 
 .registerButton:hover{
     background-color: #707070;
+    color: black;
 }

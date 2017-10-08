@@ -23,12 +23,11 @@
     font-family: unisansHeavy;
     font-size: 4.5vw;
     padding-block-start: 22px;
-    padding-block-end: 10px;
 }
 
 .jumbotron p {
     font-family: unisansThin;
-    font-size: 4.0vw;
+    font-size: 3.0vw;
     padding-block-end: 8px;
 }
 
@@ -37,7 +36,6 @@
     background-color: #808080;
     border: none;
     text-align: center;
-    padding: 10px 32px; 
 }
 
 .registerButton:hover{
