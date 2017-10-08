@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import { ListGroup, Navbar, Nav, MenuItem, NavDropdown, Button } from 'react-bootstrap';
+import { ListGroup, Button } from 'react-bootstrap';
+import Select from 'react-select';
 import './ClassList.css';
+import 'react-select/dist/react-select.css';
 import Listing from './Listing/Listing';
 import fire from '../../utils/fire';
 
 class ClassList extends Component {
   constructor(props) {
     super(props);
-    this.state = { masterList: [], curList: [] };
+    this.state = { masterList: [], curList: []};
     this.applyFilters = this.applyFilters.bind(this);
     this.resetFilters = this.resetFilters.bind(this);
     this.downloadClassList = this.downloadClassList.bind(this);
@@ -20,10 +22,10 @@ class ClassList extends Component {
     var req = new XMLHttpRequest();
     req.open('GET', url, true);
     req.responsetype = 'text';
-    req.onload = function(e) {
+    req.onload = function (e) {
       if (req.readyState === req.DONE) {
         if (req.status === 200) {
-            console.log(req.response);
+          console.log(req.response);
         }
       }
     };
@@ -52,39 +54,44 @@ class ClassList extends Component {
     });
   }
 
-  applyFilters() {
-    // Dummy filter for PNCA
-    var output = this.state.masterList.filter(function(obj) {
-      return obj.school === "Pacific Northwest College of Art (PNCA)";
+  applyFilters(val) {
+    if (val === null) {
+      this.resetFilters();
+      this.setState({ selectValue: "" });
+    }
+    var output = this.state.masterList.filter(function (obj) {
+      return obj.school === val.label;
     });
-    this.setState({ curList: output });
+    this.setState({ curList: output, selectValue: val });
   }
 
   resetFilters() {
     this.setState({ curList: this.state.masterList });
   }
 
+
   render() {
+    // Options for selection
+    const options = [
+      { value: 'pnca', label: 'Pacific Northwest College of Art (PNCA)' },
+      { value: 'mhcc', label: 'Mt. Hood Community College (MHCC)' },
+      { value: 'pcc', label: 'Portland Community College (PCC)' },
+      { value: 'ocac', label: 'Oregon College of Art and Craft (OCAC)' },
+      { value: 'osu', label: 'Oregon State University (OSU)' }
+    ];
+
     return (
       <div>
-        <Navbar collapseOnSelect>
-          <Navbar.Collapse>
-            <Nav>
-              <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
-                <MenuItem eventKey={3.1}>Action</MenuItem>
-                <MenuItem eventKey={3.2}>Another action</MenuItem>
-                <MenuItem eventKey={3.3}>Something else here</MenuItem>
-                <MenuItem divider />
-                <MenuItem eventKey={3.3}>Separated link</MenuItem>
-              </NavDropdown>
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar>
-        <Button onClick={this.applyFilters}>
-        Filter Classes
-        </Button>
+        <Select
+          name="form-field-name"
+          /* value={this.state.selectValue} */
+          options={options}
+          onChange={this.applyFilters}
+          value={this.state.selectValue}
+          /* onChange={this.applyFilters} */
+        />
         <Button onClick={this.resetFilters}>
-        Reset Filters
+          Reset Filters
         </Button>
         <ListGroup>
           {this.state.curList.map(function (listValue) {
@@ -94,7 +101,7 @@ class ClassList extends Component {
           })}
         </ListGroup>
         <Button onClick={this.updateClassList}>
-        Update Class List
+          Update Class List
         </Button>
       </div>
     )
