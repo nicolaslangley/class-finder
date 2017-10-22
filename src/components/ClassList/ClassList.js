@@ -74,7 +74,6 @@ class ClassList extends Component {
     // Options for selection
     const options = [
       { value: 'pnca', label: 'Pacific Northwest College of Art (PNCA)' },
-      { value: 'mhcc', label: 'Mt. Hood Community College (MHCC)' },
       { value: 'pcc', label: 'Portland Community College (PCC)' },
       { value: 'ocac', label: 'Oregon College of Art and Craft (OCAC)' },
       { value: 'osu', label: 'Oregon State University (OSU)' }

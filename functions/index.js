@@ -25,6 +25,8 @@ function scrape_pnca(body) {
   return classList;
 }
 
+// This scraping function has been deprecated 
+// var mhcc_url = 'http://learn.mhcc.edu/modules/shop/searchOfferings.action';
 function scrape_mhcc(body) {
   var $ = cheerio.load(body, {
     xmlMode: true
@@ -33,6 +35,7 @@ function scrape_mhcc(body) {
   var classes = $("Name").each(function (i, elem) {
     classList[i] = {
       name: $(this).text().trim(),
+      link: "temp",
       school: "Mt. Hood Community College (MHCC)"
     };
   });
@@ -85,47 +88,41 @@ exports.findClasses = functions.https.onRequest((req, res) => {
         console.log("\n===============\n" + "Pulling from PNCA: " + pnca_url + "\n===============\n");
         totalList = scrape_pnca(body);
       }).then(function () {
-        var mhcc_url = 'http://learn.mhcc.edu/modules/shop/searchOfferings.action';
-        rp(mhcc_url) // MHCC request
+        var pcc_url = 'https://www.pcc.edu/schedule/default.cfm?fa=dspTopicDetails&thisTerm=201704&topicid=CAR&type=Non-Credit';
+        rp(pcc_url) // PCC request
           .then(function (body) {
-            console.log("\n===============\n" + "Pulling from MHCC: " + mhcc_url + "\n===============\n");
-            totalList.concat(scrape_mhcc(body));
+            console.log("\n===============\n" + "Pulling from PCC: " + pcc_url + "\n===============\n");
+            totalList = totalList.concat(scrape_pcc(body));
           }).then(function () {
-            var pcc_url = 'https://www.pcc.edu/schedule/default.cfm?fa=dspTopicDetails&thisTerm=201704&topicid=CAR&type=Non-Credit';
-            rp(pcc_url) // PCC request
+            var ocac_url = 'https://community.ocac.edu/courses?field_organization_tag_tid=415&type=All&field_instructor_target_id=All&title=';
+            rp(ocac_url) // OCAC request
               .then(function (body) {
-                console.log("\n===============\n" + "Pulling from PCC: " + pcc_url + "\n===============\n");
-                totalList = totalList.concat(scrape_pcc(body));
+                console.log("\n===============\n" + "Pulling from OCAC: " + ocac_url + "\n===============\n");
+                totalList = totalList.concat(scrape_ocac(body));
               }).then(function () {
-                var ocac_url = 'https://community.ocac.edu/courses?field_organization_tag_tid=415&type=All&field_instructor_target_id=All&title=';
-                rp(ocac_url) // OCAC request
+                var osu_url = 'https://pace.oregonstate.edu/catalog';
+                rp(osu_url) // OSU request
                   .then(function (body) {
-                    console.log("\n===============\n" + "Pulling from OCAC: " + ocac_url + "\n===============\n");
-                    totalList = totalList.concat(scrape_ocac(body));
-                  }).then(function () {
-                    var osu_url = 'https://pace.oregonstate.edu/catalog';
-                    rp(osu_url) // OSU request
-                      .then(function (body) {
-                        console.log("\n===============\n" + "Pulling from OSU: " + osu_url + "\n===============\n");
-                        totalList = totalList.concat(scrape_osu(body));
-                        // Write out list to JSON
-                        var filePath = '/tmp/classlist.json'
-                        jsonfile.writeFile(filePath, totalList, function (err) {
-                          console.error(err)
-                        });
-                        // Upload a local file to a new file to be created in your bucket.
-                        bucket.upload(filePath, function (err, file) {
-                          if (!err) {
-                            console.log("Upload successful");
-                          }
-                        });
-                        res.status(200).send(totalList);
-                      }).catch(function (err) {
-                        console.log("We’ve encountered an error: " + err);
-                      });
+                    console.log("\n===============\n" + "Pulling from OSU: " + osu_url + "\n===============\n");
+                    totalList = totalList.concat(scrape_osu(body));
+                    // Write out list to JSON
+                    var filePath = '/tmp/classlist.json'
+                    jsonfile.writeFile(filePath, totalList, function (err) {
+                      console.error(err)
+                    });
+                    // Upload a local file to a new file to be created in your bucket.
+                    bucket.upload(filePath, function (err, file) {
+                      if (!err) {
+                        console.log("Upload successful");
+                      }
+                    });
+                    res.status(200).send(totalList);
+                  }).catch(function (err) {
+                    console.log("We’ve encountered an error: " + err);
                   });
               });
           });
       });
   });
+});
 });
