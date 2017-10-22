@@ -96,6 +96,7 @@ class ClassList extends Component {
           {this.state.curList.map(function (listValue) {
             return <Listing key={listValue.name}
               title={listValue.name}
+              link={listValue.link}
               school={listValue.school} />
           })}
         </PanelGroup>

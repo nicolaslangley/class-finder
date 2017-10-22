@@ -16,9 +16,10 @@ var bucket = gcs.bucket('class-finder-541da.appspot.com');
 function scrape_pnca(body) {
   var $ = cheerio.load(body);
   var classList = [];
-  var classes = $(".classdesc h3").each(function (i, elem) {
+  var classes = $(".classdesc h3 a").each(function (i, elem) {
     classList[i] = {
       name: $(this).text().trim(),
+      link: "https://cereg.pnca.edu" + $(this).attr('href').trim(),
       school: "Pacific Northwest College of Art (PNCA)"
     };
   });
@@ -48,6 +49,7 @@ function scrape_pcc(body) {
   var classes = $(".course-list > dd > a").each(function (i, elem) {
     classList[i] = {
       name: $(this).text().trim(),
+      link: "https://www.pcc.edu/schedule/" + $(this).attr('href').trim(),
       school: "Portland Community College (PCC)"
     };
   });
@@ -57,9 +59,10 @@ function scrape_pcc(body) {
 function scrape_ocac(body) {
   var $ = cheerio.load(body);
   var classList = [];
-  var classes = $(".course-teaser > .node-title").each(function (i, elem) {
+  var classes = $(".course-teaser > .node-title > h2 > a").each(function (i, elem) {
     classList[i] = {
       name: $(this).text().trim(),
+      link: "https://community.ocac.edu" + $(this).attr('href').trim(),
       school: "Oregon College of Art and Craft (OCAC)"
     };
   });
@@ -69,9 +72,10 @@ function scrape_ocac(body) {
 function scrape_osu(body) {
   var $ = cheerio.load(body);
   var classList = [];
-  var classes = $(".field-content").each(function (i, elem) {
+  var classes = $(".list-group-item").each(function (i, elem) {
     classList[i] = {
       name: $(this).text().trim(),
+      link: "https://pace.oregonstate.edu" + $(this).attr('href').trim(),
       school: "Oregon State University (OSU)"
     };
   });
@@ -124,5 +128,4 @@ exports.findClasses = functions.https.onRequest((req, res) => {
           });
       });
   });
-});
 });
